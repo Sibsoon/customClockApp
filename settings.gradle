@@ -1,0 +1,2 @@
+rootProject.name='CustomClockApp'
+include ':app'
