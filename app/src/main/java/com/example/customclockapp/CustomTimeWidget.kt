@@ -3,6 +3,7 @@ package com.example.customclockapp
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
 import android.widget.RemoteViews
 
 /**
@@ -34,11 +35,21 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
-    val widgetText = context.getString(R.string.appwidget_text)
+    //val intent = Intent()
+    //var timeStr = intent.getStringExtra("time")
+    //var dateStr = intent.getStringExtra("date")
+
+
+
+    //**********************************
+
+    var timeStr = "12:34"
+    var dateStr = "tuesday, 22 June"
+
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.custom_time_widget)
-    views.setTextViewText(R.id.appwidget_text, widgetText)
-
+    views.setTextViewText(R.id.showTime, timeStr)
+    views.setTextViewText(R.id.showDate, dateStr)
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
 }

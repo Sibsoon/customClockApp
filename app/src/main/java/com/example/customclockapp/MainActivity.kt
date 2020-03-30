@@ -1,5 +1,6 @@
 package com.example.customclockapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.widget.ImageButton
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity() {
 
     var run = true //set it to false if you want to stop the timer
     var mHandler: Handler = Handler()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +40,11 @@ class MainActivity : AppCompatActivity() {
             showDate.setText(newValue)
         }
         timer(customTime)
+        //**********************widget************************
+        //val intent = Intent(this@MainActivity, CustomTimeWidget::class.java)
+        //intent.putExtra("time", customTime.timeStr)
+        //intent.putExtra("date", customTime.dateStr)
+        //startActivity(intent)     //breaks everything
 
     }
 
