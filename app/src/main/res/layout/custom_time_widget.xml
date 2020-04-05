@@ -46,6 +46,6 @@
         android:gravity="center|center_vertical"
         android:text="00:00"
         android:textColor="#ffffff"
-        android:textSize="36sp" />
+        android:textSize="20sp" />
 
 </RelativeLayout>

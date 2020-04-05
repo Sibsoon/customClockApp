@@ -1,8 +1,11 @@
 package com.example.customclockapp
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -19,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("onCreate","MainActivity")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -46,6 +50,8 @@ class MainActivity : AppCompatActivity() {
         //intent.putExtra("date", customTime.dateStr)
         //startActivity(intent)     //breaks everything
 
+
+
     }
 
 
@@ -59,7 +65,19 @@ class MainActivity : AppCompatActivity() {
                     mHandler.post(Runnable {
                         val c = Calendar.getInstance()
                         customTime.timeStr = "${c[Calendar.HOUR_OF_DAY]}:${c[Calendar.MINUTE]}:${c[Calendar.SECOND]}"
-                        customTime.dateStr = "${c.getDisplayName(c[Calendar.DAY_OF_WEEK],Calendar.LONG,Locale.getDefault())}, ${c[Calendar.DAY_OF_MONTH]} ${c.getDisplayName(c[Calendar.MONTH],Calendar.LONG, Locale.getDefault())}"
+                        customTime.dateStr = "${c.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG,Locale.getDefault())}, ${Calendar.DAY_OF_MONTH} ${c.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault())}"
+
+
+                        // Send a broadcast so that the Operating system updates the widget
+                        val man = AppWidgetManager.getInstance(this)
+                        val ids = man.getAppWidgetIds(
+                            ComponentName(this, CustomTimeWidget::class.java)
+                        )
+                        val updateIntent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
+                        updateIntent.putExtra("time", customTime.timeStr)
+                        updateIntent.putExtra("date", customTime.dateStr)
+                        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+                        sendBroadcast(updateIntent)
                     })
                 } catch (e: Exception) {
                 }
