@@ -1,6 +1,10 @@
 <resources>
     <string name="CustomClockApp">CustomClockApp</string>
-    <string name="app_name">CustomClockApp</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="app_name">St.Luzi Time</string>
+    <string name="appwidget_text">St.Luzi TimeWidget</string>
     <string name="add_widget">Add widget</string>
+    <string name="setTimer">Set Timer</string>
+    <string name="setAlarm">Set Alarm</string>
+    <string name="unsetAlarm">disable Alarm</string>
+    <string name="startStopwatch">Start StopWatch</string>
 </resources>
