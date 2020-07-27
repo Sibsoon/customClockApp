@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style> 
+		body { background-color: #121212; }
+		
+		#clock {
+			  font-family: 'Orbitron', sans-serif;
+			  color: #66ff99;
+			  font-size: 60px;
+			  text-align: center;
+			  padding-top: 40px;
+			  padding-bottom: 3px;
+			}
+		#date {
+			  font-family: 'Orbitron', sans-serif;
+			  color: #66ff99;
+			  font-size: 50px;
+			  text-align: center;
+			  padding-top: 3px;
+			  padding-bottom: 40px;
+			}
+	</style>
+	<title>Luzi Time</title>
+	<script>
+	
+		function currentTime() {
+			var POINT_ZERO = 1595228400000/*  20.juli.2020. 9:00am */
+			//POINT_ZERO = 1594294332882
+			var date = new Date("January 1, 1970 00:00:00:000"); /* creating object of Date class */
+			const now = Date.now();
+			var milisec = now - POINT_ZERO;
+			console.log(now)
+			console.log(milisec)
+			
+			var sec = Math.floor(milisec/1000 * 6/5);
+			var min = Math.floor(sec/60);
+            var hour = Math.floor(9 + (min /60));
+			var day = Math.floor(hour/24);
+			var year = 2020;
+			//string formatting
+			var timeString = "";
+			if (hour%24 < 10) {
+				timeString += "0";
+			}
+			timeString += hour%24 +":";
+			if(min%60 <10){
+				timeString += "0";
+			}
+			timeString += min%60 + ":";
+			if(sec % 60 < 10){
+				timeString += "0";
+			}
+			timeString += sec % 60;
+			
+			var WEEK_DAYS = {0:"Mäntig", 1 :"Dsistig", 2 : "Mittwuch", 4 : "Donnstig", 5 : "Fritig", 3 : "Plutig", 6 : "Samstig", 7 : "Sunntig"};
+
+			var dateString =  WEEK_DAYS[day%8]+ " " + (20 + (day%31))+ " Juli, " +  year
+			document.getElementById("clock").innerText = timeString; /* adding time to the div */
+			document.getElementById("date").innerText = dateString;
+		  var t = setTimeout(function(){ currentTime() }, 1000); /* setting timer */
+		}
+
+		//currentTime(); /* calling currentTime() function to initiate the process */
+	</script>
+</head>
+
+<body onload="currentTime()">
+<div id="clock"></div>
+<div id="date"></div>
+
+</body>
+</html>
